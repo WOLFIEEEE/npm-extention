@@ -1,0 +1,77 @@
+{
+  "name": "a11y-feedback",
+  "version": "1.0.0",
+  "description": "A production-grade, framework-agnostic accessibility feedback and announcement engine for the web",
+  "type": "module",
+  "main": "./dist/a11y-feedback.cjs",
+  "module": "./dist/a11y-feedback.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/a11y-feedback.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/a11y-feedback.cjs"
+      }
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && tsc -p tsconfig.build.json --emitDeclarationOnly",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "eslint src --ext .ts --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run lint && npm run typecheck && npm run test && npm run build",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "accessibility",
+    "a11y",
+    "aria-live",
+    "screen-reader",
+    "wcag",
+    "announcements",
+    "focus-management",
+    "feedback",
+    "notifications"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "bugs": {
+    "url": ""
+  },
+  "homepage": "",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint": "^8.57.0",
+    "jsdom": "^24.0.0",
+    "prettier": "^3.2.0",
+    "typescript": "^5.4.0",
+    "vite": "^5.2.0",
+    "vite-plugin-dts": "^3.8.0",
+    "vitest": "^1.4.0"
+  }
+}
+
