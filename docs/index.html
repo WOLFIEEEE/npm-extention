@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>a11y-feedback - Accessibility-First Feedback Engine</title>
+  <title>a11y-feedback v2.0 - Accessibility-First Feedback Engine</title>
   <meta name="description" content="A production-grade, framework-agnostic accessibility feedback and announcement engine for the web. Screen reader announcements, focus management, and WCAG compliance.">
   
   <!-- Open Graph -->
-  <meta property="og:title" content="a11y-feedback - Accessibility-First Feedback Engine">
+  <meta property="og:title" content="a11y-feedback v2.0 - Accessibility-First Feedback Engine">
   <meta property="og:description" content="Screen reader announcements, focus management, and WCAG-safe timing behavior under a single, predictable API.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://wolfieeee.github.io/a11y-feedback/">
   
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="a11y-feedback">
+  <meta name="twitter:title" content="a11y-feedback v2.0">
   <meta name="twitter:description" content="Accessibility-first feedback and announcement engine for the web.">
   
   <!-- Favicon -->
@@ -39,12 +39,13 @@
         <a href="#" class="logo" aria-label="a11y-feedback home">
           <span class="logo-icon">♿</span>
           <span class="logo-text">a11y-feedback</span>
+          <span class="version-badge">v2.0</span>
         </a>
         
         <!-- Desktop Nav -->
         <nav class="nav nav-desktop" aria-label="Main navigation">
           <a href="#demo" class="nav-link">Demo</a>
-          <a href="#features" class="nav-link">Features</a>
+          <a href="#v2-features" class="nav-link">v2 Features</a>
           <a href="#frameworks" class="nav-link">Frameworks</a>
           <a href="#playground" class="nav-link">Playground</a>
           <a href="https://www.npmjs.com/package/@theaccessibleteam/a11y-feedback" class="nav-link" target="_blank" rel="noopener">npm</a>
@@ -67,7 +68,7 @@
     <nav id="mobile-nav" class="nav-mobile" aria-label="Mobile navigation" hidden>
       <div class="mobile-nav-content">
         <a href="#demo" class="mobile-nav-link">Demo</a>
-        <a href="#features" class="mobile-nav-link">Features</a>
+        <a href="#v2-features" class="mobile-nav-link">v2 Features</a>
         <a href="#frameworks" class="mobile-nav-link">Frameworks</a>
         <a href="#playground" class="mobile-nav-link">Playground</a>
         <a href="https://www.npmjs.com/package/@theaccessibleteam/a11y-feedback" class="mobile-nav-link" target="_blank" rel="noopener">npm</a>
@@ -83,7 +84,7 @@
       <div class="hero-content">
         <div class="hero-badge">
           <span class="badge-dot"></span>
-          Open Source & Free
+          v2.0.0 Released! New Features Inside
         </div>
         <h1 class="hero-title">
           <span class="hero-title-line">Accessibility-First</span>
@@ -94,7 +95,7 @@
           semantic feedback, focus management, and WCAG-safe timing under a single API.
         </p>
         <p class="hero-tagline">
-          <strong>This library exists because <code>aria-live</code> alone is not enough.</strong>
+          <strong>Now with action buttons, progress notifications, dialogs & more!</strong>
         </p>
         
         <div class="install-box">
@@ -115,12 +116,16 @@
         
         <div class="hero-stats">
           <div class="stat">
-            <span class="stat-value">~8KB</span>
+            <span class="stat-value">~22KB</span>
             <span class="stat-label">gzipped</span>
           </div>
           <div class="stat">
             <span class="stat-value">0</span>
             <span class="stat-label">dependencies</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value">5</span>
+            <span class="stat-label">frameworks</span>
           </div>
           <div class="stat">
             <span class="stat-value">100%</span>
@@ -162,24 +167,43 @@
           </div>
         </div>
         
-        <!-- Visual Feedback Toggle -->
+        <!-- Visual & Sound Toggle -->
         <div class="demo-card visual-toggle-card">
-          <div class="toggle-wrapper">
-            <label class="toggle-label" for="visual-toggle">
-              <span class="toggle-text">Visual Feedback Mode</span>
-              <span class="toggle-hint">Enable to see visual toasts alongside screen reader announcements</span>
-            </label>
-            <button 
-              id="visual-toggle" 
-              class="toggle-btn" 
-              role="switch" 
-              aria-checked="false"
-              aria-label="Toggle visual feedback mode"
-            >
-              <span class="toggle-track">
-                <span class="toggle-thumb"></span>
-              </span>
-            </button>
+          <div class="toggle-row">
+            <div class="toggle-wrapper">
+              <label class="toggle-label" for="visual-toggle">
+                <span class="toggle-text">Visual Feedback</span>
+                <span class="toggle-hint">Show toast notifications</span>
+              </label>
+              <button 
+                id="visual-toggle" 
+                class="toggle-btn" 
+                role="switch" 
+                aria-checked="false"
+                aria-label="Toggle visual feedback mode"
+              >
+                <span class="toggle-track">
+                  <span class="toggle-thumb"></span>
+                </span>
+              </button>
+            </div>
+            <div class="toggle-wrapper">
+              <label class="toggle-label" for="sound-toggle">
+                <span class="toggle-text">Sound Effects</span>
+                <span class="toggle-hint">Play audio feedback</span>
+              </label>
+              <button 
+                id="sound-toggle" 
+                class="toggle-btn" 
+                role="switch" 
+                aria-checked="false"
+                aria-label="Toggle sound effects"
+              >
+                <span class="toggle-track">
+                  <span class="toggle-thumb"></span>
+                </span>
+              </button>
+            </div>
           </div>
         </div>
 
@@ -202,6 +226,91 @@
             </button>
             <button class="demo-btn demo-btn-loading" data-action="loading">
               <span class="btn-icon">↻</span> Loading
+            </button>
+          </div>
+        </div>
+
+        <!-- v2.0 Action Buttons Demo -->
+        <div class="demo-card demo-card-new">
+          <div class="new-badge">NEW in v2.0</div>
+          <h3 class="demo-card-title">🔘 Action Buttons</h3>
+          <p class="demo-card-description">Notifications can include interactive action buttons for user responses.</p>
+          <div class="demo-buttons">
+            <button class="demo-btn demo-btn-info" data-action="action-buttons">
+              <span class="btn-icon">🔔</span> With Actions
+            </button>
+            <button class="demo-btn demo-btn-warning" data-action="action-undo">
+              <span class="btn-icon">↩️</span> Undo Action
+            </button>
+          </div>
+        </div>
+
+        <!-- v2.0 Progress Notifications Demo -->
+        <div class="demo-card demo-card-new">
+          <div class="new-badge">NEW in v2.0</div>
+          <h3 class="demo-card-title">📊 Progress Notifications</h3>
+          <p class="demo-card-description">Track long-running operations with real-time progress updates.</p>
+          <div class="demo-buttons">
+            <button class="demo-btn demo-btn-loading" data-action="progress-upload">
+              <span class="btn-icon">📤</span> Simulate Upload
+            </button>
+            <button class="demo-btn demo-btn-loading" data-action="progress-download">
+              <span class="btn-icon">📥</span> Simulate Download
+            </button>
+          </div>
+          <div class="progress-demo-status" id="progress-status">
+            <span class="status-idle">Click to start a progress demo</span>
+          </div>
+        </div>
+
+        <!-- v2.0 Confirm/Prompt Dialogs Demo -->
+        <div class="demo-card demo-card-new">
+          <div class="new-badge">NEW in v2.0</div>
+          <h3 class="demo-card-title">💬 Accessible Dialogs</h3>
+          <p class="demo-card-description">Promise-based confirm and prompt dialogs with full keyboard navigation.</p>
+          <div class="demo-buttons">
+            <button class="demo-btn demo-btn-warning" data-action="confirm-dialog">
+              <span class="btn-icon">❓</span> Confirm Dialog
+            </button>
+            <button class="demo-btn demo-btn-info" data-action="prompt-dialog">
+              <span class="btn-icon">✏️</span> Prompt Dialog
+            </button>
+          </div>
+          <div class="dialog-result" id="dialog-result"></div>
+        </div>
+
+        <!-- v2.0 Rich Content Demo -->
+        <div class="demo-card demo-card-new">
+          <div class="new-badge">NEW in v2.0</div>
+          <h3 class="demo-card-title">🎨 Rich Content</h3>
+          <p class="demo-card-description">Include icons, HTML, and styled content in notifications.</p>
+          <div class="demo-buttons">
+            <button class="demo-btn demo-btn-success" data-action="rich-icon">
+              <span class="btn-icon">⭐</span> With Icon
+            </button>
+            <button class="demo-btn demo-btn-info" data-action="rich-html">
+              <span class="btn-icon">🔗</span> With Link
+            </button>
+            <button class="demo-btn demo-btn-warning" data-action="rich-styled">
+              <span class="btn-icon">🎯</span> Styled Content
+            </button>
+          </div>
+        </div>
+
+        <!-- v2.0 Notification Templates Demo -->
+        <div class="demo-card demo-card-new">
+          <div class="new-badge">NEW in v2.0</div>
+          <h3 class="demo-card-title">📝 Notification Templates</h3>
+          <p class="demo-card-description">Create reusable notification patterns with predefined templates.</p>
+          <div class="demo-buttons">
+            <button class="demo-btn demo-btn-success" data-action="template-save">
+              <span class="btn-icon">💾</span> Save Template
+            </button>
+            <button class="demo-btn demo-btn-error" data-action="template-network">
+              <span class="btn-icon">🌐</span> Network Error
+            </button>
+            <button class="demo-btn demo-btn-info" data-action="template-welcome">
+              <span class="btn-icon">👋</span> Welcome Message
             </button>
           </div>
         </div>
@@ -318,12 +427,86 @@
       </div>
     </section>
 
-    <!-- Features Section -->
-    <section id="features" class="section features-section">
+    <!-- v2.0 Features Section -->
+    <section id="v2-features" class="section features-section">
       <div class="container">
-        <h2 class="section-title">Features</h2>
-        <p class="section-subtitle">Built with accessibility as the primary concern, not an afterthought.</p>
+        <h2 class="section-title">What's New in v2.0</h2>
+        <p class="section-subtitle">Major new features for enterprise-grade accessibility.</p>
         
+        <div class="features-grid">
+          <div class="feature-card feature-card-new">
+            <div class="feature-icon">🔘</div>
+            <h3 class="feature-title">Action Buttons</h3>
+            <p class="feature-description">
+              Add interactive buttons to notifications. Support for primary, secondary, 
+              and custom actions with keyboard navigation.
+            </p>
+          </div>
+          
+          <div class="feature-card feature-card-new">
+            <div class="feature-icon">📊</div>
+            <h3 class="feature-title">Progress Notifications</h3>
+            <p class="feature-description">
+              Track long-running operations with visual progress bars and 
+              screen reader announcements at key milestones.
+            </p>
+          </div>
+          
+          <div class="feature-card feature-card-new">
+            <div class="feature-icon">💬</div>
+            <h3 class="feature-title">Promise-based Dialogs</h3>
+            <p class="feature-description">
+              Accessible confirm() and prompt() dialogs that return Promises.
+              Full keyboard navigation and focus management.
+            </p>
+          </div>
+          
+          <div class="feature-card feature-card-new">
+            <div class="feature-icon">📝</div>
+            <h3 class="feature-title">Notification Templates</h3>
+            <p class="feature-description">
+              Create reusable notification patterns with predefined options.
+              Perfect for consistent error handling and user feedback.
+            </p>
+          </div>
+          
+          <div class="feature-card feature-card-new">
+            <div class="feature-icon">🎨</div>
+            <h3 class="feature-title">Rich Content</h3>
+            <p class="feature-description">
+              Include icons, HTML, and styled content in notifications.
+              Full customization with accessibility preserved.
+            </p>
+          </div>
+          
+          <div class="feature-card feature-card-new">
+            <div class="feature-icon">🔊</div>
+            <h3 class="feature-title">Sound & Haptics</h3>
+            <p class="feature-description">
+              Optional audio and haptic feedback for notifications.
+              Web Audio API integration with user preferences respected.
+            </p>
+          </div>
+          
+          <div class="feature-card feature-card-new">
+            <div class="feature-icon">📋</div>
+            <h3 class="feature-title">Notification Center</h3>
+            <p class="feature-description">
+              Centralized history panel for all notifications.
+              Users can review past notifications and mark as read.
+            </p>
+          </div>
+          
+          <div class="feature-card feature-card-new">
+            <div class="feature-icon">⌨️</div>
+            <h3 class="feature-title">Keyboard Navigation</h3>
+            <p class="feature-description">
+              Full keyboard support for all interactions.
+              Tab navigation, Escape to dismiss, and custom shortcuts.
+            </p>
+          </div>
+        </div>
+
         <div class="features-grid">
           <div class="feature-card">
             <div class="feature-icon">🔊</div>
@@ -392,7 +575,7 @@
             <div class="feature-icon">📦</div>
             <h3 class="feature-title">Zero Dependencies</h3>
             <p class="feature-description">
-              Lightweight (~8KB gzip). No external dependencies. 
+              Lightweight (~22KB gzip). No external dependencies. 
               Works with any framework or vanilla JavaScript.
             </p>
           </div>
@@ -466,7 +649,7 @@
     <section id="frameworks" class="section frameworks-section">
       <div class="container">
         <h2 class="section-title">Framework Integration</h2>
-        <p class="section-subtitle">First-class bindings for popular frameworks, or use vanilla JavaScript.</p>
+        <p class="section-subtitle">First-class bindings for 5 popular frameworks, or use vanilla JavaScript.</p>
         
         <div class="framework-tabs">
           <div class="tabs-nav" role="tablist">
@@ -479,8 +662,14 @@
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-vue" id="btn-vue">
               Vue 3
             </button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-svelte" id="btn-svelte">
+              Svelte
+            </button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-angular" id="btn-angular">
+              Angular
+            </button>
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-cdn" id="btn-cdn">
-              CDN / HTML
+              CDN
             </button>
           </div>
           
@@ -490,40 +679,70 @@
               <div class="code-card">
                 <div class="code-header">
                   <span class="code-title">TypeScript / JavaScript</span>
-                  <button class="copy-btn" data-copy="import { notify, configureFeedback } from '@theaccessibleteam/a11y-feedback'
+                  <button class="copy-btn" data-copy="import { notify, configureFeedback, confirm, prompt } from '@theaccessibleteam/a11y-feedback'
 
-// Enable visual toasts
-configureFeedback({ visual: true })
+// Enable visual toasts with sound
+configureFeedback({ 
+  visual: true,
+  enableSound: true 
+})
 
 // Simple notifications
 notify.success('Profile saved!')
 notify.error('Something went wrong')
 
-// With options
-notify.error('Invalid email', {
-  focus: '#email',
-  explainFocus: true
-})" aria-label="Copy code">
+// With action buttons (v2.0)
+notify.info('New message received', {
+  actions: [
+    { label: 'View', onClick: () => openMessage() },
+    { label: 'Dismiss', variant: 'secondary' }
+  ]
+})
+
+// Progress notifications (v2.0)
+notify.loading('Uploading...', {
+  id: 'upload',
+  progress: { value: 0, max: 100 }
+})
+
+// Promise-based dialogs (v2.0)
+const confirmed = await confirm('Delete this item?')
+const name = await prompt('Enter your name')" aria-label="Copy code">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                       <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                       <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                     </svg>
                   </button>
                 </div>
-                <pre class="code-block"><code><span class="code-keyword">import</span> { notify, configureFeedback } <span class="code-keyword">from</span> <span class="code-string">'@theaccessibleteam/a11y-feedback'</span>
+                <pre class="code-block"><code><span class="code-keyword">import</span> { notify, configureFeedback, confirm, prompt } <span class="code-keyword">from</span> <span class="code-string">'@theaccessibleteam/a11y-feedback'</span>
 
-<span class="code-comment">// Enable visual toasts</span>
-<span class="code-function">configureFeedback</span>({ <span class="code-property">visual</span>: <span class="code-keyword">true</span> })
+<span class="code-comment">// Enable visual toasts with sound</span>
+<span class="code-function">configureFeedback</span>({ 
+  <span class="code-property">visual</span>: <span class="code-keyword">true</span>,
+  <span class="code-property">enableSound</span>: <span class="code-keyword">true</span>
+})
 
 <span class="code-comment">// Simple notifications</span>
 notify.<span class="code-function">success</span>(<span class="code-string">'Profile saved!'</span>)
 notify.<span class="code-function">error</span>(<span class="code-string">'Something went wrong'</span>)
 
-<span class="code-comment">// With options</span>
-notify.<span class="code-function">error</span>(<span class="code-string">'Invalid email'</span>, {
-  <span class="code-property">focus</span>: <span class="code-string">'#email'</span>,
-  <span class="code-property">explainFocus</span>: <span class="code-keyword">true</span>
-})</code></pre>
+<span class="code-comment">// With action buttons (v2.0)</span>
+notify.<span class="code-function">info</span>(<span class="code-string">'New message received'</span>, {
+  <span class="code-property">actions</span>: [
+    { <span class="code-property">label</span>: <span class="code-string">'View'</span>, <span class="code-property">onClick</span>: () => <span class="code-function">openMessage</span>() },
+    { <span class="code-property">label</span>: <span class="code-string">'Dismiss'</span>, <span class="code-property">variant</span>: <span class="code-string">'secondary'</span> }
+  ]
+})
+
+<span class="code-comment">// Progress notifications (v2.0)</span>
+notify.<span class="code-function">loading</span>(<span class="code-string">'Uploading...'</span>, {
+  <span class="code-property">id</span>: <span class="code-string">'upload'</span>,
+  <span class="code-property">progress</span>: { <span class="code-property">value</span>: <span class="code-number">0</span>, <span class="code-property">max</span>: <span class="code-number">100</span> }
+})
+
+<span class="code-comment">// Promise-based dialogs (v2.0)</span>
+<span class="code-keyword">const</span> confirmed = <span class="code-keyword">await</span> <span class="code-function">confirm</span>(<span class="code-string">'Delete this item?'</span>)
+<span class="code-keyword">const</span> name = <span class="code-keyword">await</span> <span class="code-function">prompt</span>(<span class="code-string">'Enter your name'</span>)</code></pre>
               </div>
             </div>
             
@@ -532,19 +751,36 @@ notify.<span class="code-function">error</span>(<span class="code-string">'Inval
               <div class="code-card">
                 <div class="code-header">
                   <span class="code-title">React with Hooks</span>
-                  <button class="copy-btn" data-copy="import { useA11yFeedback } from '@theaccessibleteam/a11y-feedback-react'
+                  <button class="copy-btn" data-copy="import { useA11yFeedback, A11yFeedbackProvider } from '@theaccessibleteam/a11y-feedback-react'
 
+// Wrap your app with the provider
+function App() {
+  return (
+    <A11yFeedbackProvider config={{ visual: true }}>
+      <YourApp />
+    </A11yFeedbackProvider>
+  )
+}
+
+// Use in any component
 function SaveButton() {
-  const feedback = useA11yFeedback()
+  const { success, error, loading, confirm } = useA11yFeedback()
 
   const handleSave = async () => {
-    feedback.loading('Saving...', { id: 'save' })
+    loading('Saving...', { id: 'save' })
     
     try {
       await saveData()
-      feedback.success('Saved!', { id: 'save' })
+      success('Saved!', { id: 'save' })
     } catch (e) {
-      feedback.error('Failed to save', { id: 'save' })
+      error('Failed to save', { id: 'save' })
+    }
+  }
+
+  const handleDelete = async () => {
+    const confirmed = await confirm('Delete this item?')
+    if (confirmed) {
+      // Delete logic
     }
   }
 
@@ -556,19 +792,29 @@ function SaveButton() {
                     </svg>
                   </button>
                 </div>
-                <pre class="code-block"><code><span class="code-keyword">import</span> { useA11yFeedback } <span class="code-keyword">from</span> <span class="code-string">'@theaccessibleteam/a11y-feedback-react'</span>
+                <pre class="code-block"><code><span class="code-keyword">import</span> { useA11yFeedback, A11yFeedbackProvider } <span class="code-keyword">from</span> <span class="code-string">'@theaccessibleteam/a11y-feedback-react'</span>
 
+<span class="code-comment">// Wrap your app with the provider</span>
+<span class="code-keyword">function</span> <span class="code-function">App</span>() {
+  <span class="code-keyword">return</span> (
+    &lt;<span class="code-tag">A11yFeedbackProvider</span> <span class="code-property">config</span>={{ <span class="code-property">visual</span>: <span class="code-keyword">true</span> }}&gt;
+      &lt;<span class="code-tag">YourApp</span> /&gt;
+    &lt;/<span class="code-tag">A11yFeedbackProvider</span>&gt;
+  )
+}
+
+<span class="code-comment">// Use in any component</span>
 <span class="code-keyword">function</span> <span class="code-function">SaveButton</span>() {
-  <span class="code-keyword">const</span> feedback = <span class="code-function">useA11yFeedback</span>()
+  <span class="code-keyword">const</span> { success, error, loading, confirm } = <span class="code-function">useA11yFeedback</span>()
 
   <span class="code-keyword">const</span> handleSave = <span class="code-keyword">async</span> () => {
-    feedback.<span class="code-function">loading</span>(<span class="code-string">'Saving...'</span>, { <span class="code-property">id</span>: <span class="code-string">'save'</span> })
+    <span class="code-function">loading</span>(<span class="code-string">'Saving...'</span>, { <span class="code-property">id</span>: <span class="code-string">'save'</span> })
     
     <span class="code-keyword">try</span> {
       <span class="code-keyword">await</span> <span class="code-function">saveData</span>()
-      feedback.<span class="code-function">success</span>(<span class="code-string">'Saved!'</span>, { <span class="code-property">id</span>: <span class="code-string">'save'</span> })
+      <span class="code-function">success</span>(<span class="code-string">'Saved!'</span>, { <span class="code-property">id</span>: <span class="code-string">'save'</span> })
     } <span class="code-keyword">catch</span> (e) {
-      feedback.<span class="code-function">error</span>(<span class="code-string">'Failed to save'</span>, { <span class="code-property">id</span>: <span class="code-string">'save'</span> })
+      <span class="code-function">error</span>(<span class="code-string">'Failed to save'</span>, { <span class="code-property">id</span>: <span class="code-string">'save'</span> })
     }
   }
 
@@ -583,26 +829,7 @@ function SaveButton() {
               <div class="code-card">
                 <div class="code-header">
                   <span class="code-title">Vue 3 Composition API</span>
-                  <button class="copy-btn" data-copy="<script setup>
-import { useA11yFeedback } from '@theaccessibleteam/a11y-feedback-vue'
-
-const feedback = useA11yFeedback()
-
-async function handleSubmit() {
-  feedback.loading('Submitting...', { id: 'submit' })
-
-  try {
-    await submitForm()
-    feedback.success('Submitted!', { id: 'submit' })
-  } catch (e) {
-    feedback.error('Submission failed', { id: 'submit' })
-  }
-}
-</script>
-
-<template>
-  <button @click=\"handleSubmit\">Submit</button>
-</template>" aria-label="Copy code">
+                  <button class="copy-btn" aria-label="Copy code">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                       <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                       <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
@@ -612,17 +839,22 @@ async function handleSubmit() {
                 <pre class="code-block"><code><span class="code-tag">&lt;script setup&gt;</span>
 <span class="code-keyword">import</span> { useA11yFeedback } <span class="code-keyword">from</span> <span class="code-string">'@theaccessibleteam/a11y-feedback-vue'</span>
 
-<span class="code-keyword">const</span> feedback = <span class="code-function">useA11yFeedback</span>()
+<span class="code-keyword">const</span> { success, error, loading, confirm } = <span class="code-function">useA11yFeedback</span>()
 
 <span class="code-keyword">async function</span> <span class="code-function">handleSubmit</span>() {
-  feedback.<span class="code-function">loading</span>(<span class="code-string">'Submitting...'</span>, { <span class="code-property">id</span>: <span class="code-string">'submit'</span> })
+  <span class="code-function">loading</span>(<span class="code-string">'Submitting...'</span>, { <span class="code-property">id</span>: <span class="code-string">'submit'</span> })
 
   <span class="code-keyword">try</span> {
     <span class="code-keyword">await</span> <span class="code-function">submitForm</span>()
-    feedback.<span class="code-function">success</span>(<span class="code-string">'Submitted!'</span>, { <span class="code-property">id</span>: <span class="code-string">'submit'</span> })
+    <span class="code-function">success</span>(<span class="code-string">'Submitted!'</span>, { <span class="code-property">id</span>: <span class="code-string">'submit'</span> })
   } <span class="code-keyword">catch</span> (e) {
-    feedback.<span class="code-function">error</span>(<span class="code-string">'Submission failed'</span>, { <span class="code-property">id</span>: <span class="code-string">'submit'</span> })
+    <span class="code-function">error</span>(<span class="code-string">'Submission failed'</span>, { <span class="code-property">id</span>: <span class="code-string">'submit'</span> })
   }
+}
+
+<span class="code-keyword">async function</span> <span class="code-function">handleDelete</span>() {
+  <span class="code-keyword">const</span> confirmed = <span class="code-keyword">await</span> <span class="code-function">confirm</span>(<span class="code-string">'Delete this?'</span>)
+  <span class="code-keyword">if</span> (confirmed) { <span class="code-comment">/* delete */</span> }
 }
 <span class="code-tag">&lt;/script&gt;</span>
 
@@ -632,52 +864,92 @@ async function handleSubmit() {
               </div>
               <p class="install-hint">Install: <code>npm i @theaccessibleteam/a11y-feedback-vue</code></p>
             </div>
+
+            <!-- Svelte Tab -->
+            <div class="tab-panel" role="tabpanel" id="tab-svelte" aria-labelledby="btn-svelte" hidden>
+              <div class="code-card">
+                <div class="code-header">
+                  <span class="code-title">Svelte</span>
+                  <span class="new-tag">NEW</span>
+                </div>
+                <pre class="code-block"><code><span class="code-tag">&lt;script&gt;</span>
+<span class="code-keyword">import</span> { useA11yFeedback } <span class="code-keyword">from</span> <span class="code-string">'@theaccessibleteam/a11y-feedback-svelte'</span>
+
+<span class="code-keyword">const</span> { success, error, loading, confirm } = <span class="code-function">useA11yFeedback</span>()
+
+<span class="code-keyword">async function</span> <span class="code-function">handleSave</span>() {
+  <span class="code-function">loading</span>(<span class="code-string">'Saving...'</span>, { <span class="code-property">id</span>: <span class="code-string">'save'</span> })
+
+  <span class="code-keyword">try</span> {
+    <span class="code-keyword">await</span> <span class="code-function">saveData</span>()
+    <span class="code-function">success</span>(<span class="code-string">'Saved!'</span>, { <span class="code-property">id</span>: <span class="code-string">'save'</span> })
+  } <span class="code-keyword">catch</span> (e) {
+    <span class="code-function">error</span>(<span class="code-string">'Failed'</span>, { <span class="code-property">id</span>: <span class="code-string">'save'</span> })
+  }
+}
+<span class="code-tag">&lt;/script&gt;</span>
+
+&lt;<span class="code-tag">button</span> <span class="code-property">on:click</span>={handleSave}&gt;Save&lt;/<span class="code-tag">button</span>&gt;</code></pre>
+              </div>
+              <p class="install-hint">Install: <code>npm i @theaccessibleteam/a11y-feedback-svelte</code></p>
+            </div>
+
+            <!-- Angular Tab -->
+            <div class="tab-panel" role="tabpanel" id="tab-angular" aria-labelledby="btn-angular" hidden>
+              <div class="code-card">
+                <div class="code-header">
+                  <span class="code-title">Angular</span>
+                  <span class="new-tag">NEW</span>
+                </div>
+                <pre class="code-block"><code><span class="code-keyword">import</span> { Component, <span class="code-property">inject</span> } <span class="code-keyword">from</span> <span class="code-string">'@angular/core'</span>
+<span class="code-keyword">import</span> { A11yFeedbackService } <span class="code-keyword">from</span> <span class="code-string">'@theaccessibleteam/a11y-feedback-angular'</span>
+
+<span class="code-function">@Component</span>({
+  <span class="code-property">selector</span>: <span class="code-string">'app-save-button'</span>,
+  <span class="code-property">template</span>: <span class="code-string">`&lt;button (click)="save()"&gt;Save&lt;/button&gt;`</span>
+})
+<span class="code-keyword">export class</span> <span class="code-function">SaveButtonComponent</span> {
+  <span class="code-keyword">private</span> feedback = <span class="code-function">inject</span>(A11yFeedbackService)
+
+  <span class="code-keyword">async</span> <span class="code-function">save</span>() {
+    <span class="code-keyword">this</span>.feedback.<span class="code-function">loading</span>(<span class="code-string">'Saving...'</span>, { <span class="code-property">id</span>: <span class="code-string">'save'</span> })
+
+    <span class="code-keyword">try</span> {
+      <span class="code-keyword">await</span> <span class="code-keyword">this</span>.<span class="code-function">saveData</span>()
+      <span class="code-keyword">this</span>.feedback.<span class="code-function">success</span>(<span class="code-string">'Saved!'</span>, { <span class="code-property">id</span>: <span class="code-string">'save'</span> })
+    } <span class="code-keyword">catch</span> (e) {
+      <span class="code-keyword">this</span>.feedback.<span class="code-function">error</span>(<span class="code-string">'Failed'</span>, { <span class="code-property">id</span>: <span class="code-string">'save'</span> })
+    }
+  }
+}</code></pre>
+              </div>
+              <p class="install-hint">Install: <code>npm i @theaccessibleteam/a11y-feedback-angular</code></p>
+            </div>
             
             <!-- CDN Tab -->
             <div class="tab-panel" role="tabpanel" id="tab-cdn" aria-labelledby="btn-cdn" hidden>
               <div class="code-card">
                 <div class="code-header">
                   <span class="code-title">HTML with CDN</span>
-                  <button class="copy-btn" data-copy="<!DOCTYPE html>
-<html lang=&quot;en&quot;>
-<head>
-  <script src=&quot;https://unpkg.com/@theaccessibleteam/a11y-feedback/dist/a11y-feedback.umd.js&quot;><\/script>
-</head>
-<body>
-  <button id=&quot;save-btn&quot;>Save</button>
-  
-  <script>
-    const { notify, configureFeedback } = window.A11yFeedback
-    
-    configureFeedback({ visual: true })
-    
-    document.getElementById('save-btn').addEventListener('click', () => {
-      notify.success('Saved successfully!')
-    })
-  <\/script>
-</body>
-</html>" aria-label="Copy code">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                  </button>
                 </div>
                 <pre class="code-block"><code><span class="code-tag">&lt;!DOCTYPE html&gt;</span>
 <span class="code-tag">&lt;html</span> <span class="code-property">lang</span>=<span class="code-string">"en"</span><span class="code-tag">&gt;</span>
 <span class="code-tag">&lt;head&gt;</span>
-  <span class="code-tag">&lt;script</span> <span class="code-property">src</span>=<span class="code-string">"https://unpkg.com/@theaccessibleteam/a11y-feedback/dist/a11y-feedback.umd.js"</span><span class="code-tag">&gt;&lt;/script&gt;</span>
+  <span class="code-tag">&lt;script</span> <span class="code-property">src</span>=<span class="code-string">"https://unpkg.com/@theaccessibleteam/a11y-feedback@2/dist/a11y-feedback.umd.js"</span><span class="code-tag">&gt;&lt;/script&gt;</span>
 <span class="code-tag">&lt;/head&gt;</span>
 <span class="code-tag">&lt;body&gt;</span>
   <span class="code-tag">&lt;button</span> <span class="code-property">id</span>=<span class="code-string">"save-btn"</span><span class="code-tag">&gt;</span>Save<span class="code-tag">&lt;/button&gt;</span>
   
   <span class="code-tag">&lt;script&gt;</span>
-    <span class="code-keyword">const</span> { notify, configureFeedback } = window.A11yFeedback
+    <span class="code-keyword">const</span> { notify, configureFeedback, confirm } = window.A11yFeedback
     
     <span class="code-function">configureFeedback</span>({ <span class="code-property">visual</span>: <span class="code-keyword">true</span> })
     
-    document.<span class="code-function">getElementById</span>(<span class="code-string">'save-btn'</span>).<span class="code-function">addEventListener</span>(<span class="code-string">'click'</span>, () => {
-      notify.<span class="code-function">success</span>(<span class="code-string">'Saved successfully!'</span>)
+    document.<span class="code-function">getElementById</span>(<span class="code-string">'save-btn'</span>).<span class="code-function">addEventListener</span>(<span class="code-string">'click'</span>, <span class="code-keyword">async</span> () => {
+      <span class="code-keyword">const</span> confirmed = <span class="code-keyword">await</span> <span class="code-function">confirm</span>(<span class="code-string">'Save changes?'</span>)
+      <span class="code-keyword">if</span> (confirmed) {
+        notify.<span class="code-function">success</span>(<span class="code-string">'Saved!'</span>)
+      }
     })
   <span class="code-tag">&lt;/script&gt;</span>
 <span class="code-tag">&lt;/body&gt;</span>
@@ -742,9 +1014,11 @@ setTimeout(() => {
         <div class="playground-examples">
           <span class="examples-label">Try an example:</span>
           <button class="example-btn" data-example="basic">Basic</button>
-          <button class="example-btn" data-example="loading">Loading Pattern</button>
-          <button class="example-btn" data-example="events">Event System</button>
-          <button class="example-btn" data-example="config">Configuration</button>
+          <button class="example-btn" data-example="actions">Action Buttons</button>
+          <button class="example-btn" data-example="progress">Progress</button>
+          <button class="example-btn" data-example="dialogs">Dialogs</button>
+          <button class="example-btn" data-example="templates">Templates</button>
+          <button class="example-btn" data-example="events">Events</button>
         </div>
       </div>
     </section>
@@ -755,7 +1029,7 @@ setTimeout(() => {
         <div class="cta-content">
           <h2 class="cta-title">Ready to make your app accessible?</h2>
           <p class="cta-description">
-            Join developers building inclusive web experiences with a11y-feedback.
+            Join developers building inclusive web experiences with a11y-feedback v2.0.
           </p>
           <div class="cta-buttons">
             <a href="https://www.npmjs.com/package/@theaccessibleteam/a11y-feedback" class="btn btn-primary btn-large" target="_blank" rel="noopener">
@@ -777,6 +1051,7 @@ setTimeout(() => {
         <div class="footer-brand">
           <span class="logo-icon">♿</span>
           <span class="logo-text">a11y-feedback</span>
+          <span class="version-badge">v2.0</span>
         </div>
         <p class="footer-tagline">Built by <a href="https://github.com/WOLFIEEEE" target="_blank" rel="noopener">The Accessible Team</a></p>
         <nav class="footer-links" aria-label="Footer navigation">

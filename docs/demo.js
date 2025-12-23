@@ -1,6 +1,6 @@
 /**
- * a11y-feedback Demo Site Interactive Script
- * Comprehensive demo with screen reader simulation, playground, and form validation
+ * a11y-feedback v2.0 Demo Site Interactive Script
+ * Comprehensive demo with all v2.0 features
  */
 
 (function () {
@@ -12,17 +12,25 @@
     configureFeedback, 
     enableFeedbackDebug, 
     onFeedback,
-    onAnyFeedback 
+    onAnyFeedback,
+    confirm,
+    prompt,
+    createTemplate
   } = window.A11yFeedback;
 
   // State
   let visualModeEnabled = false;
+  let soundEnabled = false;
   let announceCount = 0;
   let isSaving = false;
+  let isUploading = false;
 
   // DOM Elements
   const visualToggle = document.getElementById('visual-toggle');
+  const soundToggle = document.getElementById('sound-toggle');
   const saveStatus = document.getElementById('save-status');
+  const progressStatus = document.getElementById('progress-status');
+  const dialogResult = document.getElementById('dialog-result');
   const announceCountEl = document.getElementById('announce-count');
   const srTimeline = document.getElementById('sr-timeline');
   const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
@@ -112,7 +120,7 @@
   }
 
   // ==========================================================================
-  // Visual Mode Toggle
+  // Toggle Buttons
   // ==========================================================================
 
   visualToggle?.addEventListener('click', function () {
@@ -129,6 +137,21 @@
       notify.info('Visual feedback mode enabled. Toast notifications will now appear.');
     } else {
       notify.info('Visual feedback mode disabled. Only screen reader announcements active.');
+    }
+  });
+
+  soundToggle?.addEventListener('click', function () {
+    soundEnabled = !soundEnabled;
+    this.setAttribute('aria-checked', soundEnabled.toString());
+
+    configureFeedback({
+      enableSound: soundEnabled
+    });
+
+    if (soundEnabled) {
+      notify.info('Sound effects enabled.');
+    } else {
+      notify.info('Sound effects disabled.');
     }
   });
 
@@ -188,7 +211,7 @@
   });
 
   // ==========================================================================
-  // Basic Notification Buttons
+  // All Demo Button Actions
   // ==========================================================================
 
   document.querySelectorAll('[data-action]').forEach(function (button) {
@@ -200,6 +223,7 @@
 
   function handleAction(action) {
     switch (action) {
+      // Basic notifications
       case 'success':
         notify.success('Operation completed successfully!');
         incrementCount();
@@ -225,6 +249,60 @@
         incrementCount();
         break;
 
+      // v2.0 Action Buttons
+      case 'action-buttons':
+        handleActionButtons();
+        break;
+
+      case 'action-undo':
+        handleUndoAction();
+        break;
+
+      // v2.0 Progress Notifications
+      case 'progress-upload':
+        handleProgressUpload();
+        break;
+
+      case 'progress-download':
+        handleProgressDownload();
+        break;
+
+      // v2.0 Dialogs
+      case 'confirm-dialog':
+        handleConfirmDialog();
+        break;
+
+      case 'prompt-dialog':
+        handlePromptDialog();
+        break;
+
+      // v2.0 Rich Content
+      case 'rich-icon':
+        handleRichIcon();
+        break;
+
+      case 'rich-html':
+        handleRichHtml();
+        break;
+
+      case 'rich-styled':
+        handleRichStyled();
+        break;
+
+      // v2.0 Templates
+      case 'template-save':
+        handleTemplateSave();
+        break;
+
+      case 'template-network':
+        handleTemplateNetwork();
+        break;
+
+      case 'template-welcome':
+        handleTemplateWelcome();
+        break;
+
+      // Loading patterns
       case 'save-pattern':
         handleSavePattern(true);
         break;
@@ -233,6 +311,7 @@
         handleSavePattern(false);
         break;
 
+      // Deduplication
       case 'dedupe-test':
         handleDedupeTest();
         break;
@@ -241,6 +320,260 @@
         handleForceTest();
         break;
     }
+  }
+
+  // ==========================================================================
+  // v2.0 Action Buttons Demo
+  // ==========================================================================
+
+  function handleActionButtons() {
+    notify.info('You have a new message from John', {
+      actions: [
+        { 
+          label: 'View Message', 
+          onClick: function() { 
+            notify.success('Opening message...');
+          }
+        },
+        { 
+          label: 'Mark as Read', 
+          variant: 'secondary',
+          onClick: function() { 
+            notify.success('Message marked as read');
+          }
+        }
+      ]
+    });
+    incrementCount();
+  }
+
+  function handleUndoAction() {
+    notify.warning('Item deleted', {
+      actions: [
+        { 
+          label: 'Undo', 
+          onClick: function() { 
+            notify.success('Item restored!');
+          }
+        }
+      ],
+      timeout: 5000
+    });
+    incrementCount();
+  }
+
+  // ==========================================================================
+  // v2.0 Progress Notifications Demo
+  // ==========================================================================
+
+  function handleProgressUpload() {
+    if (isUploading) return;
+    isUploading = true;
+
+    progressStatus.innerHTML = '<span class="status-loading">📤 Uploading file...</span>';
+    
+    let progress = 0;
+    notify.loading('Uploading file... 0%', { 
+      id: 'upload-demo',
+      progress: { value: 0, max: 100 }
+    });
+    incrementCount();
+
+    const interval = setInterval(function() {
+      progress += Math.random() * 15 + 5;
+      if (progress >= 100) {
+        progress = 100;
+        clearInterval(interval);
+        
+        notify.success('File uploaded successfully!', { id: 'upload-demo' });
+        progressStatus.innerHTML = '<span class="status-success">✓ Upload complete!</span>';
+        incrementCount();
+        
+        setTimeout(function() {
+          progressStatus.innerHTML = '<span class="status-idle">Click to start a progress demo</span>';
+          isUploading = false;
+        }, 3000);
+      } else {
+        notify.loading(`Uploading file... ${Math.round(progress)}%`, { 
+          id: 'upload-demo',
+          progress: { value: Math.round(progress), max: 100 }
+        });
+      }
+    }, 500);
+  }
+
+  function handleProgressDownload() {
+    if (isUploading) return;
+    isUploading = true;
+
+    progressStatus.innerHTML = '<span class="status-loading">📥 Downloading file...</span>';
+    
+    let progress = 0;
+    notify.loading('Downloading... 0%', { 
+      id: 'download-demo',
+      progress: { value: 0, max: 100 }
+    });
+    incrementCount();
+
+    const interval = setInterval(function() {
+      progress += Math.random() * 20 + 10;
+      if (progress >= 100) {
+        progress = 100;
+        clearInterval(interval);
+        
+        notify.success('Download complete!', { id: 'download-demo' });
+        progressStatus.innerHTML = '<span class="status-success">✓ Download complete!</span>';
+        incrementCount();
+        
+        setTimeout(function() {
+          progressStatus.innerHTML = '<span class="status-idle">Click to start a progress demo</span>';
+          isUploading = false;
+        }, 3000);
+      } else {
+        notify.loading(`Downloading... ${Math.round(progress)}%`, { 
+          id: 'download-demo',
+          progress: { value: Math.round(progress), max: 100 }
+        });
+      }
+    }, 300);
+  }
+
+  // ==========================================================================
+  // v2.0 Dialogs Demo
+  // ==========================================================================
+
+  async function handleConfirmDialog() {
+    dialogResult.innerHTML = '<span class="status-loading">Waiting for user response...</span>';
+    
+    try {
+      const result = await confirm('Are you sure you want to delete this item? This action cannot be undone.');
+      
+      if (result) {
+        dialogResult.innerHTML = '<span class="status-success">✓ User confirmed the action</span>';
+        notify.success('Item deleted successfully!');
+      } else {
+        dialogResult.innerHTML = '<span class="status-idle">✕ User cancelled the action</span>';
+        notify.info('Deletion cancelled');
+      }
+    } catch (e) {
+      dialogResult.innerHTML = '<span class="status-error">Dialog was dismissed</span>';
+    }
+    
+    incrementCount();
+  }
+
+  async function handlePromptDialog() {
+    dialogResult.innerHTML = '<span class="status-loading">Waiting for user input...</span>';
+    
+    try {
+      const result = await prompt('What would you like to name this file?');
+      
+      if (result && result.value) {
+        dialogResult.innerHTML = `<span class="status-success">✓ User entered: "${escapeHtml(result.value)}"</span>`;
+        notify.success(`File renamed to "${result.value}"`);
+      } else {
+        dialogResult.innerHTML = '<span class="status-idle">✕ User cancelled or provided no input</span>';
+        notify.info('Rename cancelled');
+      }
+    } catch (e) {
+      dialogResult.innerHTML = '<span class="status-error">Dialog was dismissed</span>';
+    }
+    
+    incrementCount();
+  }
+
+  // ==========================================================================
+  // v2.0 Rich Content Demo
+  // ==========================================================================
+
+  function handleRichIcon() {
+    notify.success('Task completed!', {
+      richContent: {
+        icon: '⭐',
+        iconColor: '#fbbf24'
+      }
+    });
+    incrementCount();
+  }
+
+  function handleRichHtml() {
+    notify.info('Check out our documentation', {
+      richContent: {
+        html: 'Visit our <a href="https://github.com/WOLFIEEEE/a11y-feedback" target="_blank">GitHub page</a> for more details.'
+      }
+    });
+    incrementCount();
+  }
+
+  function handleRichStyled() {
+    notify.warning('Important update available', {
+      richContent: {
+        icon: '🎯',
+        title: 'Version 2.0 Released!',
+        subtitle: 'Includes action buttons, progress, and more'
+      }
+    });
+    incrementCount();
+  }
+
+  // ==========================================================================
+  // v2.0 Templates Demo
+  // ==========================================================================
+
+  // Create reusable templates
+  const saveTemplate = createTemplate ? createTemplate({
+    type: 'success',
+    messageTemplate: 'Successfully saved {item}!',
+    options: {
+      timeout: 3000
+    }
+  }) : null;
+
+  const networkErrorTemplate = createTemplate ? createTemplate({
+    type: 'error',
+    messageTemplate: 'Network error: {error}',
+    options: {
+      actions: [
+        { label: 'Retry', onClick: function() { notify.info('Retrying...'); } }
+      ]
+    }
+  }) : null;
+
+  const welcomeTemplate = createTemplate ? createTemplate({
+    type: 'info',
+    messageTemplate: 'Welcome back, {name}!',
+    options: {
+      richContent: {
+        icon: '👋'
+      }
+    }
+  }) : null;
+
+  function handleTemplateSave() {
+    if (saveTemplate) {
+      saveTemplate.show({ item: 'document' });
+    } else {
+      notify.success('Successfully saved document!');
+    }
+    incrementCount();
+  }
+
+  function handleTemplateNetwork() {
+    if (networkErrorTemplate) {
+      networkErrorTemplate.show({ error: 'Connection timeout' });
+    } else {
+      notify.error('Network error: Connection timeout');
+    }
+    incrementCount();
+  }
+
+  function handleTemplateWelcome() {
+    if (welcomeTemplate) {
+      welcomeTemplate.show({ name: 'Developer' });
+    } else {
+      notify.info('Welcome back, Developer!');
+    }
+    incrementCount();
   }
 
   // ==========================================================================
@@ -256,8 +589,8 @@
       const btnLoading = submitBtn.querySelector('.btn-loading');
       
       // Clear previous errors
-      this.querySelectorAll('.form-error').forEach(el => el.textContent = '');
-      this.querySelectorAll('.form-input').forEach(el => {
+      this.querySelectorAll('.form-error').forEach(function(el) { el.textContent = ''; });
+      this.querySelectorAll('.form-input').forEach(function(el) {
         el.classList.remove('error');
         el.removeAttribute('aria-invalid');
       });
@@ -266,7 +599,7 @@
       const name = document.getElementById('form-name');
       const email = document.getElementById('form-email');
       const password = document.getElementById('form-password');
-      const confirm = document.getElementById('form-confirm');
+      const confirmEl = document.getElementById('form-confirm');
       const terms = document.getElementById('form-terms');
 
       let firstError = null;
@@ -306,9 +639,9 @@
       }
 
       // Confirm password
-      if (password.value && password.value !== confirm.value) {
-        setFieldError(confirm, 'confirm-error', 'Passwords do not match');
-        if (!firstError) firstError = confirm;
+      if (password.value && password.value !== confirmEl.value) {
+        setFieldError(confirmEl, 'confirm-error', 'Passwords do not match');
+        if (!firstError) firstError = confirmEl;
         errors.push('Passwords do not match');
       }
 
@@ -321,7 +654,7 @@
 
       // If errors, announce and focus first error
       if (errors.length > 0) {
-        notify.error(`Please fix ${errors.length} error${errors.length > 1 ? 's' : ''}: ${errors[0]}`, {
+        notify.error('Please fix ' + errors.length + ' error' + (errors.length > 1 ? 's' : '') + ': ' + errors[0], {
           focus: '#' + firstError.id,
           explainFocus: true
         });
@@ -336,7 +669,7 @@
       notify.loading('Creating your account...', { id: 'form-submit' });
 
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      await new Promise(function(resolve) { setTimeout(resolve, 2000); });
 
       // Success
       notify.success('Account created successfully! Welcome aboard.', { id: 'form-submit' });
@@ -346,12 +679,12 @@
       submitBtn.disabled = false;
       
       // Reset form
-      this.reset();
+      validationForm.reset();
     });
 
     validationForm.addEventListener('reset', function() {
-      this.querySelectorAll('.form-error').forEach(el => el.textContent = '');
-      this.querySelectorAll('.form-input').forEach(el => {
+      this.querySelectorAll('.form-error').forEach(function(el) { el.textContent = ''; });
+      this.querySelectorAll('.form-input').forEach(function(el) {
         el.classList.remove('error');
         el.removeAttribute('aria-invalid');
       });
@@ -425,28 +758,30 @@
       playgroundLog.innerHTML = '';
       
       // Log function for output
-      const logToPlayground = function(message, type = 'info') {
+      var logToPlayground = function(message, type) {
+        type = type || 'info';
         const entry = document.createElement('div');
-        entry.className = `log-entry log-entry-${type}`;
-        entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+        entry.className = 'log-entry log-entry-' + type;
+        entry.textContent = '[' + new Date().toLocaleTimeString() + '] ' + message;
         playgroundLog.appendChild(entry);
         playgroundLog.scrollTop = playgroundLog.scrollHeight;
       };
 
       // Override console.log temporarily
       const originalLog = console.log;
-      console.log = function(...args) {
+      console.log = function() {
+        const args = Array.prototype.slice.call(arguments);
         logToPlayground(args.join(' '), 'info');
         originalLog.apply(console, args);
       };
 
       try {
-        // Execute the code with notify available
-        const func = new Function('notify', 'configureFeedback', 'onFeedback', code);
-        func(notify, configureFeedback, onFeedback);
+        // Execute the code with all v2.0 APIs available
+        const func = new Function('notify', 'configureFeedback', 'onFeedback', 'confirm', 'prompt', 'createTemplate', code);
+        func(notify, configureFeedback, onFeedback, confirm, prompt, createTemplate);
         logToPlayground('Code executed successfully', 'success');
       } catch (error) {
-        logToPlayground(`Error: ${error.message}`, 'error');
+        logToPlayground('Error: ' + error.message, 'error');
       }
 
       // Restore console.log
@@ -458,41 +793,19 @@
     });
   }
 
-  // Example code snippets
+  // Example code snippets - updated for v2.0
   const examples = {
-    basic: `// Basic notifications
-notify.success('Profile saved successfully!')
-notify.info('New message received')
-notify.warning('Low storage space')
-notify.error('Connection lost')`,
+    basic: '// Basic notifications\nnotify.success(\'Profile saved successfully!\')\nnotify.info(\'New message received\')\nnotify.warning(\'Low storage space\')\nnotify.error(\'Connection lost\')',
 
-    loading: `// Loading → Success pattern
-notify.loading('Uploading file...', { id: 'upload' })
+    actions: '// Notifications with action buttons (v2.0)\nnotify.info(\'New comment on your post\', {\n  actions: [\n    { \n      label: \'View\', \n      onClick: () => console.log(\'Opening post...\') \n    },\n    { \n      label: \'Dismiss\', \n      variant: \'secondary\' \n    }\n  ]\n})\n\n// Undo action pattern\nnotify.warning(\'Message deleted\', {\n  actions: [\n    { label: \'Undo\', onClick: () => notify.success(\'Restored!\') }\n  ],\n  timeout: 5000\n})',
 
-// Simulate upload completion
-setTimeout(() => {
-  notify.success('File uploaded!', { id: 'upload' })
-}, 2000)`,
+    progress: '// Progress notifications (v2.0)\nlet progress = 0\nnotify.loading(\'Uploading... 0%\', { \n  id: \'upload\',\n  progress: { value: 0, max: 100 }\n})\n\n// Simulate progress\nconst interval = setInterval(() => {\n  progress += 20\n  if (progress >= 100) {\n    clearInterval(interval)\n    notify.success(\'Upload complete!\', { id: \'upload\' })\n  } else {\n    notify.loading(`Uploading... ${progress}%`, { \n      id: \'upload\',\n      progress: { value: progress, max: 100 }\n    })\n  }\n}, 500)',
 
-    events: `// Listen to feedback events
-onFeedback('announced', ({ event, region }) => {
-  console.log(\`Announced to \${region}: \${event.message}\`)
-})
+    dialogs: '// Promise-based dialogs (v2.0)\n(async () => {\n  // Confirm dialog\n  const confirmed = await confirm(\'Delete this file?\')\n  console.log(\'User confirmed:\', confirmed)\n\n  // Prompt dialog\n  const result = await prompt(\'Enter new filename:\')\n  if (result && result.value) {\n    console.log(\'User entered:\', result.value)\n    notify.success(`Renamed to ${result.value}`)\n  }\n})()',
 
-// Trigger some notifications
-notify.success('This will be logged')
-notify.error('This too!')`,
+    templates: '// Notification templates (v2.0)\nconst errorTemplate = createTemplate({\n  type: \'error\',\n  messageTemplate: \'Failed to {action}: {reason}\',\n  options: {\n    actions: [\n      { label: \'Retry\', onClick: () => console.log(\'Retrying...\') }\n    ]\n  }\n})\n\n// Use the template\nerrorTemplate.show({ \n  action: \'save document\', \n  reason: \'network timeout\' \n})',
 
-    config: `// Configure visual feedback
-configureFeedback({
-  visual: true,
-  visualPosition: 'bottom-right',
-  maxVisualItems: 3
-})
-
-notify.info('Visual toasts enabled!')
-notify.success('Try clicking multiple times')
-notify.warning('Only 3 will show at once')`
+    events: '// Listen to feedback events\nonFeedback(\'announced\', ({ event, region }) => {\n  console.log(`Announced to ${region}: ${event.message}`)\n})\n\n// Trigger some notifications\nnotify.success(\'This will be logged\')\nnotify.error(\'This too!\')'
   };
 
   document.querySelectorAll('.example-btn').forEach(function(btn) {
@@ -585,7 +898,7 @@ notify.warning('Only 3 will show at once')`
 
   // Welcome message (delayed)
   setTimeout(function () {
-    notify.info('Welcome to the a11y-feedback demo! Try the controls to see it in action.', {
+    notify.info('Welcome to the a11y-feedback v2.0 demo! Try the new features below.', {
       id: 'welcome'
     });
   }, 500);
