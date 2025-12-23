@@ -8,7 +8,7 @@ A production-grade, framework-agnostic accessibility feedback and announcement e
 
 [![npm version](https://img.shields.io/npm/v/a11y-feedback.svg)](https://www.npmjs.com/package/a11y-feedback)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![CI](https://github.com/pariharkhushwant/a11y-feedback/actions/workflows/ci.yml/badge.svg)](https://github.com/pariharkhushwant/a11y-feedback/actions/workflows/ci.yml)
+[![CI](https://github.com/WOLFIEEEE/npm-extention/actions/workflows/ci.yml/badge.svg)](https://github.com/WOLFIEEEE/npm-extention/actions/workflows/ci.yml)
 
 ## Installation
 
@@ -359,8 +359,8 @@ Requires ES2020 support. For older browsers, use a transpiler.
 
 ```bash
 # Clone the repository
-git clone https://github.com/pariharkhushwant/a11y-feedback.git
-cd a11y-feedback
+git clone https://github.com/WOLFIEEEE/npm-extention.git
+cd npm-extention
 
 # Install dependencies
 npm install
