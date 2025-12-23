@@ -6,28 +6,28 @@ A production-grade, framework-agnostic accessibility feedback and announcement e
 
 **This library exists because `aria-live` alone is not enough.**
 
-[![npm version](https://img.shields.io/npm/v/a11y-feedback.svg)](https://www.npmjs.com/package/a11y-feedback)
+[![npm version](https://img.shields.io/npm/v/@theaccessibleteam/a11y-feedback.svg)](https://www.npmjs.com/package/@theaccessibleteam/a11y-feedback)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Installation
 
 ```bash
-npm install a11y-feedback
+npm install @theaccessibleteam/a11y-feedback
 ```
 
 ```bash
-yarn add a11y-feedback
+yarn add @theaccessibleteam/a11y-feedback
 ```
 
 ```bash
-pnpm add a11y-feedback
+pnpm add @theaccessibleteam/a11y-feedback
 ```
 
 ### CDN Usage
 
 ```html
 <!-- UMD build for script tags -->
-<script src="https://unpkg.com/a11y-feedback/dist/a11y-feedback.umd.js"></script>
+<script src="https://unpkg.com/@theaccessibleteam/a11y-feedback/dist/a11y-feedback.umd.js"></script>
 <script>
   const { notify } = window.A11yFeedback
   notify.success('Hello from CDN!')
@@ -37,7 +37,7 @@ pnpm add a11y-feedback
 ## Quick Start
 
 ```typescript
-import { notify } from 'a11y-feedback'
+import { notify } from '@theaccessibleteam/a11y-feedback'
 
 // Basic usage with sugar helpers
 notify.success('Profile updated successfully')
@@ -89,7 +89,7 @@ import {
   configureFeedback,
   enableFeedbackDebug,
   getFeedbackLog
-} from 'a11y-feedback'
+} from '@theaccessibleteam/a11y-feedback'
 ```
 
 ### notify
@@ -250,7 +250,7 @@ Visual behavior:
 ### Dismiss Programmatically
 
 ```typescript
-import { dismissVisualFeedback, dismissAllVisualFeedback } from 'a11y-feedback'
+import { dismissVisualFeedback, dismissAllVisualFeedback } from '@theaccessibleteam/a11y-feedback'
 
 // Dismiss specific notification
 dismissVisualFeedback('notification-id')
@@ -264,7 +264,7 @@ dismissAllVisualFeedback()
 Enable verbose logging:
 
 ```typescript
-import { enableFeedbackDebug, getFeedbackLog, getFeedbackStats } from 'a11y-feedback'
+import { enableFeedbackDebug, getFeedbackLog, getFeedbackStats } from '@theaccessibleteam/a11y-feedback'
 
 enableFeedbackDebug()
 
@@ -326,7 +326,7 @@ import type {
   FeedbackEvent,
   FeedbackConfig,
   FeedbackLogEntry
-} from 'a11y-feedback'
+} from '@theaccessibleteam/a11y-feedback'
 ```
 
 ## Browser Support
