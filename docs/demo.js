@@ -7,7 +7,7 @@
   'use strict';
 
   // Get the library from the global namespace (UMD build)
-  const { notify, configureFeedback, enableDebug, getDebugTelemetry } = window.A11yFeedback;
+  const { notify, configureFeedback, enableFeedbackDebug, getFeedbackLog } = window.A11yFeedback;
 
   // State
   let visualModeEnabled = false;
@@ -22,7 +22,7 @@
   const eventLog = document.getElementById('event-log');
 
   // Enable debug mode to track all events
-  enableDebug(true);
+  enableFeedbackDebug();
 
   // ==========================================================================
   // Visual Mode Toggle
