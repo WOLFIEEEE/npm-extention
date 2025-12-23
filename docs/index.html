@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>a11y-feedback - Accessibility-First Feedback Engine</title>
+  <meta name="description" content="A production-grade, framework-agnostic accessibility feedback and announcement engine for the web. Screen reader announcements, focus management, and WCAG compliance.">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="a11y-feedback - Accessibility-First Feedback Engine">
+  <meta property="og:description" content="Screen reader announcements, focus management, and WCAG-safe timing behavior under a single, predictable API.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://wolfieeee.github.io/npm-extention/">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="a11y-feedback">
+  <meta name="twitter:description" content="Accessibility-first feedback and announcement engine for the web.">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♿</text></svg>">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Skip Link -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <a href="#" class="logo" aria-label="a11y-feedback home">
+          <span class="logo-icon">♿</span>
+          <span class="logo-text">a11y-feedback</span>
+        </a>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="#demo" class="nav-link">Demo</a>
+          <a href="#features" class="nav-link">Features</a>
+          <a href="#usage" class="nav-link">Usage</a>
+          <a href="https://www.npmjs.com/package/@theaccessibleteam/a11y-feedback" class="nav-link" target="_blank" rel="noopener">npm</a>
+          <a href="https://github.com/WOLFIEEEE/npm-extention" class="nav-link" target="_blank" rel="noopener">GitHub</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">
+          <span class="hero-title-line">Accessibility-First</span>
+          <span class="hero-title-line gradient-text">Feedback Engine</span>
+        </h1>
+        <p class="hero-subtitle">
+          A production-grade, framework-agnostic library that unifies screen reader announcements, 
+          semantic feedback, focus management, and WCAG-safe timing under a single API.
+        </p>
+        <p class="hero-tagline">
+          <strong>This library exists because <code>aria-live</code> alone is not enough.</strong>
+        </p>
+        
+        <div class="install-box">
+          <code class="install-code">npm install @theaccessibleteam/a11y-feedback</code>
+          <button class="copy-btn" data-copy="npm install @theaccessibleteam/a11y-feedback" aria-label="Copy install command">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span class="copy-text">Copy</span>
+          </button>
+        </div>
+        
+        <div class="hero-links">
+          <a href="#demo" class="btn btn-primary">Try Live Demo</a>
+          <a href="https://github.com/WOLFIEEEE/npm-extention#readme" class="btn btn-secondary" target="_blank" rel="noopener">Documentation</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main id="main">
+    
+    <!-- Demo Section -->
+    <section id="demo" class="section demo-section">
+      <div class="container">
+        <h2 class="section-title">Live Demo</h2>
+        <p class="section-subtitle">Experience the library in action. Use a screen reader for the full accessibility experience.</p>
+        
+        <!-- Visual Feedback Toggle -->
+        <div class="demo-card visual-toggle-card">
+          <div class="toggle-wrapper">
+            <label class="toggle-label" for="visual-toggle">
+              <span class="toggle-text">Visual Feedback Mode</span>
+              <span class="toggle-hint">Enable to see visual toasts alongside screen reader announcements</span>
+            </label>
+            <button 
+              id="visual-toggle" 
+              class="toggle-btn" 
+              role="switch" 
+              aria-checked="false"
+              aria-label="Toggle visual feedback mode"
+            >
+              <span class="toggle-track">
+                <span class="toggle-thumb"></span>
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Basic Notifications -->
+        <div class="demo-card">
+          <h3 class="demo-card-title">Basic Notifications</h3>
+          <p class="demo-card-description">Click to trigger different feedback types with correct ARIA semantics.</p>
+          <div class="demo-buttons">
+            <button class="demo-btn demo-btn-success" data-action="success">
+              <span class="btn-icon">✓</span> Success
+            </button>
+            <button class="demo-btn demo-btn-error" data-action="error">
+              <span class="btn-icon">✕</span> Error
+            </button>
+            <button class="demo-btn demo-btn-warning" data-action="warning">
+              <span class="btn-icon">⚠</span> Warning
+            </button>
+            <button class="demo-btn demo-btn-info" data-action="info">
+              <span class="btn-icon">ℹ</span> Info
+            </button>
+            <button class="demo-btn demo-btn-loading" data-action="loading">
+              <span class="btn-icon">↻</span> Loading
+            </button>
+          </div>
+        </div>
+
+        <!-- Focus Management -->
+        <div class="demo-card">
+          <h3 class="demo-card-title">Focus Management</h3>
+          <p class="demo-card-description">Errors can move focus to the source. Success and info types are blocked from stealing focus.</p>
+          <div class="demo-form">
+            <div class="form-group">
+              <label for="demo-email" class="form-label">Email Address</label>
+              <input 
+                type="email" 
+                id="demo-email" 
+                class="form-input" 
+                placeholder="Enter your email"
+                aria-describedby="email-hint"
+              >
+              <span id="email-hint" class="form-hint">We'll use this to contact you</span>
+            </div>
+            <div class="form-actions">
+              <button class="demo-btn demo-btn-error" data-action="error-focus">
+                Show Error + Focus
+              </button>
+              <button class="demo-btn demo-btn-success" data-action="success-no-focus">
+                Success (No Focus Steal)
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Loading Pattern -->
+        <div class="demo-card">
+          <h3 class="demo-card-title">Loading → Success Pattern</h3>
+          <p class="demo-card-description">Use the same ID to replace loading states with results. No duplicate announcements.</p>
+          <div class="demo-buttons">
+            <button class="demo-btn demo-btn-loading" data-action="save-pattern">
+              <span class="btn-icon">💾</span> Simulate Save Operation
+            </button>
+          </div>
+          <div class="pattern-status" id="save-status" aria-live="off">
+            <span class="status-idle">Click to start</span>
+          </div>
+        </div>
+
+        <!-- Deduplication -->
+        <div class="demo-card">
+          <h3 class="demo-card-title">Deduplication & Force</h3>
+          <p class="demo-card-description">Rapid duplicate messages are skipped. Use <code>force: true</code> to override.</p>
+          <div class="demo-buttons">
+            <button class="demo-btn demo-btn-info" data-action="dedupe-test">
+              Click Rapidly (Deduped)
+            </button>
+            <button class="demo-btn demo-btn-info" data-action="force-test">
+              Click Rapidly (Forced)
+            </button>
+          </div>
+          <div class="dedupe-counter">
+            <span>Announcements made: <strong id="announce-count">0</strong></span>
+          </div>
+        </div>
+
+        <!-- Event Log -->
+        <div class="demo-card log-card">
+          <h3 class="demo-card-title">Event Log</h3>
+          <p class="demo-card-description">Real-time log of all feedback events and their metadata.</p>
+          <div class="log-actions">
+            <button class="demo-btn demo-btn-secondary" data-action="clear-log">Clear Log</button>
+          </div>
+          <div class="log-container" id="event-log" role="log" aria-label="Feedback event log">
+            <div class="log-empty">Events will appear here...</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section features-section">
+      <div class="container">
+        <h2 class="section-title">Features</h2>
+        <p class="section-subtitle">Built with accessibility as the primary concern, not an afterthought.</p>
+        
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">🔊</div>
+            <h3 class="feature-title">Screen Reader First</h3>
+            <p class="feature-description">
+              Automatically manages ARIA live regions with correct politeness levels. 
+              Polite for success/info, assertive for errors/warnings.
+            </p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">🎯</div>
+            <h3 class="feature-title">Focus Safety</h3>
+            <p class="feature-description">
+              Enforced rules prevent focus theft. Only errors and warnings can move focus. 
+              Success messages never steal focus.
+            </p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">🔄</div>
+            <h3 class="feature-title">Smart Deduplication</h3>
+            <p class="feature-description">
+              Rapid duplicate messages are automatically skipped. 
+              Use ID-based replacement for loading → success patterns.
+            </p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">♿</div>
+            <h3 class="feature-title">WCAG 2.2 Compliant</h3>
+            <p class="feature-description">
+              Errors never auto-dismiss. Configurable timeouts. 
+              Respects prefers-reduced-motion. Fully keyboard accessible.
+            </p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">📦</div>
+            <h3 class="feature-title">Zero Dependencies</h3>
+            <p class="feature-description">
+              Lightweight (~20KB). No external dependencies. 
+              Works with any framework or vanilla JavaScript.
+            </p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">🔧</div>
+            <h3 class="feature-title">TypeScript Ready</h3>
+            <p class="feature-description">
+              Full TypeScript support with strict types. 
+              Excellent IDE autocompletion and type safety.
+            </p>
+          </div>
+        </div>
+
+        <!-- Semantics Table -->
+        <div class="semantics-table-wrapper">
+          <h3 class="table-title">Semantic Mappings (Enforced)</h3>
+          <table class="semantics-table">
+            <thead>
+              <tr>
+                <th scope="col">Type</th>
+                <th scope="col">ARIA Role</th>
+                <th scope="col">aria-live</th>
+                <th scope="col">Priority</th>
+                <th scope="col">Can Move Focus</th>
+                <th scope="col">Auto-Dismiss</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="type-badge type-success">success</span></td>
+                <td><code>status</code></td>
+                <td><code>polite</code></td>
+                <td>Low</td>
+                <td><span class="badge badge-no">No</span></td>
+                <td><span class="badge badge-yes">Yes</span></td>
+              </tr>
+              <tr>
+                <td><span class="type-badge type-info">info</span></td>
+                <td><code>status</code></td>
+                <td><code>polite</code></td>
+                <td>Low</td>
+                <td><span class="badge badge-no">No</span></td>
+                <td><span class="badge badge-yes">Yes</span></td>
+              </tr>
+              <tr>
+                <td><span class="type-badge type-loading">loading</span></td>
+                <td><code>status</code></td>
+                <td><code>polite</code></td>
+                <td>Low</td>
+                <td><span class="badge badge-no">No</span></td>
+                <td><span class="badge badge-no">No</span></td>
+              </tr>
+              <tr>
+                <td><span class="type-badge type-warning">warning</span></td>
+                <td><code>alert</code></td>
+                <td><code>assertive</code></td>
+                <td>High</td>
+                <td><span class="badge badge-yes">Yes</span></td>
+                <td><span class="badge badge-yes">Yes</span></td>
+              </tr>
+              <tr>
+                <td><span class="type-badge type-error">error</span></td>
+                <td><code>alert</code></td>
+                <td><code>assertive</code></td>
+                <td>High</td>
+                <td><span class="badge badge-yes">Yes</span></td>
+                <td><span class="badge badge-no">No</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Usage Section -->
+    <section id="usage" class="section usage-section">
+      <div class="container">
+        <h2 class="section-title">Quick Start</h2>
+        <p class="section-subtitle">Get started in seconds with a simple, intuitive API.</p>
+        
+        <div class="code-examples">
+          <div class="code-card">
+            <div class="code-header">
+              <span class="code-title">Basic Usage</span>
+              <button class="copy-btn" data-copy="import { notify } from '@theaccessibleteam/a11y-feedback'
+
+notify.success('Profile updated successfully')
+notify.error('Something went wrong')
+notify.warning('Your session expires in 5 minutes')
+notify.info('New features available')
+notify.loading('Saving changes...')" aria-label="Copy code">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+              </button>
+            </div>
+            <pre class="code-block"><code><span class="code-keyword">import</span> { notify } <span class="code-keyword">from</span> <span class="code-string">'@theaccessibleteam/a11y-feedback'</span>
+
+notify.<span class="code-function">success</span>(<span class="code-string">'Profile updated successfully'</span>)
+notify.<span class="code-function">error</span>(<span class="code-string">'Something went wrong'</span>)
+notify.<span class="code-function">warning</span>(<span class="code-string">'Your session expires in 5 minutes'</span>)
+notify.<span class="code-function">info</span>(<span class="code-string">'New features available'</span>)
+notify.<span class="code-function">loading</span>(<span class="code-string">'Saving changes...'</span>)</code></pre>
+          </div>
+
+          <div class="code-card">
+            <div class="code-header">
+              <span class="code-title">Error with Focus</span>
+              <button class="copy-btn" data-copy="notify.error('Please enter a valid email', {
+  focus: '#email',
+  explainFocus: true
+})" aria-label="Copy code">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+              </button>
+            </div>
+            <pre class="code-block"><code>notify.<span class="code-function">error</span>(<span class="code-string">'Please enter a valid email'</span>, {
+  <span class="code-property">focus</span>: <span class="code-string">'#email'</span>,
+  <span class="code-property">explainFocus</span>: <span class="code-keyword">true</span>
+})
+<span class="code-comment">// Screen reader: "Please enter a valid email. Focus moved to Email field."</span></code></pre>
+          </div>
+
+          <div class="code-card">
+            <div class="code-header">
+              <span class="code-title">Loading → Success Pattern</span>
+              <button class="copy-btn" data-copy="// Start loading
+notify.loading('Saving...', { id: 'save-op' })
+
+// Later, replace with success
+notify.success('Saved!', { id: 'save-op' })" aria-label="Copy code">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+              </button>
+            </div>
+            <pre class="code-block"><code><span class="code-comment">// Start loading</span>
+notify.<span class="code-function">loading</span>(<span class="code-string">'Saving...'</span>, { <span class="code-property">id</span>: <span class="code-string">'save-op'</span> })
+
+<span class="code-comment">// Later, replace with success</span>
+notify.<span class="code-function">success</span>(<span class="code-string">'Saved!'</span>, { <span class="code-property">id</span>: <span class="code-string">'save-op'</span> })</code></pre>
+          </div>
+
+          <div class="code-card">
+            <div class="code-header">
+              <span class="code-title">Enable Visual Mode</span>
+              <button class="copy-btn" data-copy="import { configureFeedback } from '@theaccessibleteam/a11y-feedback'
+
+configureFeedback({
+  visual: true,
+  visualPosition: 'top-right',
+  maxVisualItems: 5
+})" aria-label="Copy code">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+              </button>
+            </div>
+            <pre class="code-block"><code><span class="code-keyword">import</span> { configureFeedback } <span class="code-keyword">from</span> <span class="code-string">'@theaccessibleteam/a11y-feedback'</span>
+
+<span class="code-function">configureFeedback</span>({
+  <span class="code-property">visual</span>: <span class="code-keyword">true</span>,
+  <span class="code-property">visualPosition</span>: <span class="code-string">'top-right'</span>,
+  <span class="code-property">maxVisualItems</span>: <span class="code-number">5</span>
+})</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section cta-section">
+      <div class="container">
+        <div class="cta-content">
+          <h2 class="cta-title">Ready to make your app accessible?</h2>
+          <p class="cta-description">
+            Join developers building inclusive web experiences with a11y-feedback.
+          </p>
+          <div class="cta-buttons">
+            <a href="https://www.npmjs.com/package/@theaccessibleteam/a11y-feedback" class="btn btn-primary btn-large" target="_blank" rel="noopener">
+              Install from npm
+            </a>
+            <a href="https://github.com/WOLFIEEEE/npm-extention" class="btn btn-secondary btn-large" target="_blank" rel="noopener">
+              View on GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <span class="logo-icon">♿</span>
+          <span class="logo-text">a11y-feedback</span>
+        </div>
+        <p class="footer-tagline">Built by <a href="https://github.com/WOLFIEEEE" target="_blank" rel="noopener">@theaccessibleteam</a></p>
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="https://www.npmjs.com/package/@theaccessibleteam/a11y-feedback" target="_blank" rel="noopener">npm</a>
+          <a href="https://github.com/WOLFIEEEE/npm-extention" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://github.com/WOLFIEEEE/npm-extention#readme" target="_blank" rel="noopener">Docs</a>
+          <a href="https://github.com/WOLFIEEEE/npm-extention/issues" target="_blank" rel="noopener">Issues</a>
+        </nav>
+        <p class="footer-license">MIT License</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Load the library from unpkg CDN -->
+  <script src="https://unpkg.com/@theaccessibleteam/a11y-feedback@1.0.0/dist/a11y-feedback.umd.js"></script>
+  
+  <!-- Demo Script -->
+  <script src="demo.js"></script>
+</body>
+</html>
+
