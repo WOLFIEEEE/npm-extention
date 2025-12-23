@@ -101,7 +101,7 @@ export function createProgressController(
  */
 function updateProgress(notificationId: string, value: number, message?: string): void {
   const state = progressStates.get(notificationId)
-  if (!state || !state.active) return
+  if (!state?.active) return
 
   // Clamp value
   state.value = Math.max(0, Math.min(state.max, value))
@@ -124,7 +124,7 @@ function updateProgress(notificationId: string, value: number, message?: string)
  */
 function completeProgress(notificationId: string, message?: string): void {
   const state = progressStates.get(notificationId)
-  if (!state || !state.active) return
+  if (!state?.active) return
 
   state.active = false
   state.value = state.max
@@ -156,7 +156,7 @@ function completeProgress(notificationId: string, message?: string): void {
  */
 function failProgress(notificationId: string, message?: string): void {
   const state = progressStates.get(notificationId)
-  if (!state || !state.active) return
+  if (!state?.active) return
 
   state.active = false
 

@@ -191,7 +191,7 @@ export function emitFeedbackEvent<T extends FeedbackEventType>(
   if (wildcardListeners) {
     wildcardListeners.forEach((listener) => {
       try {
-        (listener as FeedbackWildcardListener)(type, payload as FeedbackEventPayloads[FeedbackEventType])
+        (listener as FeedbackWildcardListener)(type, payload)
       } catch (error) {
         console.error(`[a11y-feedback] Wildcard listener error:`, error)
       }

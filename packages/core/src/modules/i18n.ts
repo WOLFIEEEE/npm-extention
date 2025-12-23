@@ -96,12 +96,12 @@ export function getTranslation<K extends keyof FeedbackTranslations>(
 
   // Priority: custom translations > locale translations > defaults
   if (config.translations?.[key]) {
-    return config.translations[key] as string
+    return config.translations[key]
   }
 
   const localeTranslations = LOCALE_TRANSLATIONS[locale]
   if (localeTranslations?.[key]) {
-    return localeTranslations[key] as string
+    return localeTranslations[key]
   }
 
   return DEFAULT_TRANSLATIONS[key]
