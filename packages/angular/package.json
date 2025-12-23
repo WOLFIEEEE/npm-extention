@@ -21,11 +21,9 @@
     "dev": "tsup src/index.ts --format cjs,esm --dts --watch"
   },
   "peerDependencies": {
+    "@theaccessibleteam/a11y-feedback": "^2.0.0",
     "@angular/core": ">=15.0.0",
     "rxjs": ">=7.0.0"
-  },
-  "dependencies": {
-    "@theaccessibleteam/a11y-feedback": "workspace:*"
   },
   "devDependencies": {
     "@angular/core": "^17.0.0",
@@ -52,4 +50,3 @@
     "access": "public"
   }
 }
-

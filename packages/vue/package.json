@@ -52,7 +52,7 @@
   },
   "homepage": "https://github.com/WOLFIEEEE/a11y-feedback/tree/main/packages/vue#readme",
   "peerDependencies": {
-    "@theaccessibleteam/a11y-feedback": "workspace:^",
+    "@theaccessibleteam/a11y-feedback": "^2.0.0",
     "vue": "^3.3.0"
   },
   "devDependencies": {
