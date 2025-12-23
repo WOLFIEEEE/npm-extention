@@ -56,12 +56,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git+https://github.com/pariharkhushwant/a11y-feedback.git"
   },
   "bugs": {
-    "url": ""
+    "url": "https://github.com/pariharkhushwant/a11y-feedback/issues"
   },
-  "homepage": "",
+  "homepage": "https://github.com/pariharkhushwant/a11y-feedback#readme",
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^7.0.0",
     "@typescript-eslint/parser": "^7.0.0",

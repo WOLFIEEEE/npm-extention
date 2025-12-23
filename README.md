@@ -8,6 +8,7 @@ A production-grade, framework-agnostic accessibility feedback and announcement e
 
 [![npm version](https://img.shields.io/npm/v/a11y-feedback.svg)](https://www.npmjs.com/package/a11y-feedback)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![CI](https://github.com/pariharkhushwant/a11y-feedback/actions/workflows/ci.yml/badge.svg)](https://github.com/pariharkhushwant/a11y-feedback/actions/workflows/ci.yml)
 
 ## Installation
 
@@ -21,6 +22,17 @@ yarn add a11y-feedback
 
 ```bash
 pnpm add a11y-feedback
+```
+
+### CDN Usage
+
+```html
+<!-- UMD build for script tags -->
+<script src="https://unpkg.com/a11y-feedback/dist/a11y-feedback.umd.js"></script>
+<script>
+  const { notify } = window.A11yFeedback
+  notify.success('Hello from CDN!')
+</script>
 ```
 
 ## Quick Start
@@ -329,9 +341,189 @@ Requires ES2020 support. For older browsers, use a transpiler.
 
 ## Bundle Size
 
-- ESM: ~8KB (minified)
-- CJS: ~8KB (minified)
+- ESM: ~23KB (minified)
+- CJS: ~19KB (minified)
+- UMD: ~19KB (minified)
 - No dependencies
+
+---
+
+## Development
+
+### Prerequisites
+
+- Node.js >= 18
+- npm, yarn, or pnpm
+
+### Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/pariharkhushwant/a11y-feedback.git
+cd a11y-feedback
+
+# Install dependencies
+npm install
+
+# Run tests
+npm test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Build the library
+npm run build
+
+# Lint the code
+npm run lint
+
+# Format the code
+npm run format
+
+# Type check
+npm run typecheck
+```
+
+### Project Structure
+
+```
+a11y-feedback/
+├── src/
+│   ├── index.ts              # Public API exports
+│   ├── notify.ts             # Main notify function & sugar helpers
+│   ├── config.ts             # configureFeedback, global state
+│   ├── types.ts              # TypeScript interfaces
+│   ├── constants.ts          # Semantic mappings, timing defaults
+│   ├── modules/
+│   │   ├── announcer.ts      # Core announcement logic
+│   │   ├── regions.ts        # Live region DOM management
+│   │   ├── queue.ts          # Announcement queue & priority
+│   │   ├── focus.ts          # Focus management & safety rules
+│   │   ├── dedupe.ts         # Deduplication & replacement
+│   │   ├── visual.ts         # Visual feedback component
+│   │   └── debug.ts          # Debug mode & telemetry
+│   └── utils/
+│       ├── dom.ts            # DOM helpers
+│       └── timing.ts         # Microtask delays, ZWC injection
+├── tests/                    # Vitest test files
+├── examples/                 # Demo HTML files
+└── dist/                     # Built output (generated)
+```
+
+### Available Scripts
+
+| Script | Description |
+|--------|-------------|
+| `npm run build` | Build ESM, CJS, UMD bundles and type declarations |
+| `npm run test` | Run all tests once |
+| `npm run test:watch` | Run tests in watch mode |
+| `npm run lint` | Lint source files with ESLint |
+| `npm run lint:fix` | Lint and auto-fix issues |
+| `npm run format` | Format code with Prettier |
+| `npm run typecheck` | Run TypeScript type checking |
+| `npm run clean` | Remove dist folder |
+
+---
+
+## Publishing to npm
+
+### First-time Setup
+
+1. Create an npm account at https://www.npmjs.com/signup
+2. Login to npm from your terminal:
+
+```bash
+npm login
+```
+
+3. Verify you're logged in:
+
+```bash
+npm whoami
+```
+
+### Publishing Steps
+
+1. **Update version** (follow semantic versioning):
+
+```bash
+# Patch release (bug fixes): 1.0.0 → 1.0.1
+npm version patch
+
+# Minor release (new features, backwards compatible): 1.0.0 → 1.1.0
+npm version minor
+
+# Major release (breaking changes): 1.0.0 → 2.0.0
+npm version major
+```
+
+2. **Run quality checks** (automated via `prepublishOnly`):
+
+```bash
+npm run lint
+npm run typecheck
+npm run test
+npm run build
+```
+
+3. **Publish to npm**:
+
+```bash
+npm publish
+```
+
+4. **Push the version tag to GitHub**:
+
+```bash
+git push origin main --tags
+```
+
+### Publishing a Beta/Preview Version
+
+```bash
+# Update version with prerelease tag
+npm version prerelease --preid=beta
+
+# Publish with beta tag (users install via: npm install a11y-feedback@beta)
+npm publish --tag beta
+```
+
+### Unpublishing (Emergency Only)
+
+```bash
+# Unpublish a specific version (within 72 hours of publish)
+npm unpublish a11y-feedback@1.0.1
+
+# Deprecate a version (preferred over unpublish)
+npm deprecate a11y-feedback@1.0.1 "Critical bug, please upgrade to 1.0.2"
+```
+
+---
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch: `git checkout -b feature/amazing-feature`
+3. Make your changes
+4. Run tests: `npm test`
+5. Run linting: `npm run lint`
+6. Commit your changes: `git commit -m 'feat: add amazing feature'`
+7. Push to the branch: `git push origin feature/amazing-feature`
+8. Open a Pull Request
+
+### Commit Message Convention
+
+We follow [Conventional Commits](https://www.conventionalcommits.org/):
+
+- `feat:` - New features
+- `fix:` - Bug fixes
+- `docs:` - Documentation changes
+- `style:` - Code style changes (formatting, etc.)
+- `refactor:` - Code refactoring
+- `test:` - Adding or updating tests
+- `chore:` - Maintenance tasks
+
+---
 
 ## What This Library Intentionally Does NOT Do
 
@@ -341,7 +533,14 @@ Requires ES2020 support. For older browsers, use a transpiler.
 - No framework bindings in core
 - No accessibility auditing
 
+---
+
 ## License
 
 MIT
 
+---
+
+## Acknowledgments
+
+Built with accessibility in mind, inspired by the need for a unified, safe, and predictable feedback system for screen reader users.
