@@ -1,6 +1,6 @@
 {
   "name": "@theaccessibleteam/a11y-feedback",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "publishConfig": {
     "access": "public"
   },
@@ -72,4 +72,3 @@
     "url": "https://github.com/sponsors/WOLFIEEEE"
   }
 }
-

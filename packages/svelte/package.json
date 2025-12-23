@@ -1,6 +1,6 @@
 {
   "name": "@theaccessibleteam/a11y-feedback-svelte",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Svelte bindings for a11y-feedback accessibility notification library",
   "type": "module",
   "main": "./dist/index.cjs",
